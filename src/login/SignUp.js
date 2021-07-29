@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from "axios";
+import { Email } from '@material-ui/icons';
 
 function Copyright() {
   return (
@@ -48,6 +50,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [signUpEmail, setSignUpEmail] = useState();
+  const [signUpPassword, setSignUpPassword] = useState();
+  const [signUpPasswordCheck, setSignUpPasswordCheck] = useState();
+  
+
+  useEffect(() => {
+    console.log(`signUpEmail: ${signUpEmail}`);
+    console.log(`signUpPassword: ${signUpPassword}`);
+  }, [signUpEmail, signUpPassword])
+
+
+  const handleEmailChange = (e) => {
+    setSignUpEmail(e.target.value)
+  }
+  const handlePasswordChange = (e) => {
+      setSignUpPassword(e.target.value)
+  }
+
+  const handleSignUpSubmit = () => {
+      
+    axios.post("http://localhost:3000/login/signUp",{
+        email: signUpEmail,
+        password: signUpPassword
+    }).then( response => {console.log(response)})
+    .catch(response => {console.log(response)})
+}
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,7 +87,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={handleSignUpSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               {/* <TextField
@@ -92,6 +120,8 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 name="email"
+                onChange={handleEmailChange}
+                value={signUpEmail}
                 autoComplete="email"
               />
             </Grid>
@@ -104,6 +134,8 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
+                onChange={handlePasswordChange}
+                value={signUpPassword}
                 autoComplete="current-password"
               />
             </Grid>
@@ -116,6 +148,7 @@ export default function SignUp() {
                 label="PW Check"
                 type="password"
                 id="passwordCheck"
+                value={signUpPasswordCheck}
                 autoComplete="current-password"
               />
             </Grid>
