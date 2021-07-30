@@ -68,14 +68,14 @@ export default function SignUp() {
       setSignUpPassword(e.target.value)
   }
 
-  const handleSignUpSubmit = () => {
-      
+  const handleSignUpSubmit = (event) => {
+    event.preventDefault();
     axios.post("http://localhost:3000/login/signUp",{
         email: signUpEmail,
         password: signUpPassword
     }).then( response => {console.log(response)})
     .catch(response => {console.log(response)})
-}
+  }
 
   return (
     <Container component="main" maxWidth="xs">
