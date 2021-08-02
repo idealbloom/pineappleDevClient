@@ -1,46 +1,47 @@
-import React, { useEffect, useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import axios from "axios";
-import bcryptjs from 'bcryptjs';
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect, useState } from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import axios from 'axios';
+// import bcryptjs from 'bcryptjs';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
+      {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
+      </Link>{' '}
+      {new Date().getFullYear()}.
     </Typography>
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -59,39 +60,40 @@ export default function SignIn() {
     console.log(`signInPassword: ${signInPassword}`);
   }, [signInEmail, signInPassword]);
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = e => {
     setSignInEmail(e.target.value);
   };
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = e => {
     setSignInPassword(e.target.value);
   };
 
-
-  const handleSignInSubmit = async (event) => {
-    event.preventDefault();    
+  const handleSignInSubmit = async event => {
+    event.preventDefault();
 
     // const saltRounds = 10;
     // const salt = await bcryptjs.genSalt(saltRounds);
     // const hash = await bcryptjs.hash(signInPassword, salt);
 
     const data = {
-        email: signInEmail,
-        password: signInPassword,
+      email: signInEmail,
+      password: signInPassword,
     };
     console.log(data);
 
-    axios.post('/login/signIn', data).then(response => {
-		const { accessToken } = response.data;
+    axios
+      .post('/login/signIn', data)
+      .then(response => {
+        const { accessToken } = response.data;
         console.log(response.data);
-		// API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-		axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
+        axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
-		// accessToken을 localStorage, cookie 등에 저장하지 않는다!
-
-	}).catch(error => {
-		// ... 에러 처리
-        console.log(`signIn error: ${error}`)
-	});
+        // accessToken을 localStorage, cookie 등에 저장하지 않는다!
+      })
+      .catch(error => {
+        // ... 에러 처리
+        console.log(`signIn error: ${error}`);
+      });
 
     // axios
     //   .post("http://localhost:3000/login/signIn", {
@@ -162,7 +164,7 @@ export default function SignIn() {
             </Grid>
             <Grid item>
               <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+                Don't have an account? Sign Up
               </Link>
             </Grid>
           </Grid>
