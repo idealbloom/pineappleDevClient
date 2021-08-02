@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
+import bcryptjs from 'bcryptjs';
 
 function Copyright() {
   return (
@@ -66,19 +67,43 @@ export default function SignIn() {
   };
 
 
-  const handleSignInSubmit = (event) => {
-    event.preventDefault();
-    axios
-      .post("http://localhost:3000/login/signIn", {
+  const handleSignInSubmit = async (event) => {
+    event.preventDefault();    
+
+    // const saltRounds = 10;
+    // const salt = await bcryptjs.genSalt(saltRounds);
+    // const hash = await bcryptjs.hash(signInPassword, salt);
+
+    const data = {
         email: signInEmail,
         password: signInPassword,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((response) => {
-        console.log(response);
-      });
+    };
+    console.log(data);
+
+    axios.post('/login/signIn', data).then(response => {
+		const { accessToken } = response.data;
+        console.log(response.data);
+		// API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
+		axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+		// accessToken을 localStorage, cookie 등에 저장하지 않는다!
+
+	}).catch(error => {
+		// ... 에러 처리
+        console.log(`signIn error: ${error}`)
+	});
+
+    // axios
+    //   .post("http://localhost:3000/login/signIn", {
+    //     email: signInEmail,
+    //     password: signInPassword,
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((response) => {
+    //     console.log(response);
+    //   });
   };
 
   return (

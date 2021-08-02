@@ -5,8 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from "axios";
 
-// axios.defaults.baseURL = "https://localhost";
-// axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(
   <React.StrictMode>
