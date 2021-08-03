@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { SignIn, SignUp } from './login';
+import { SignIn, SignUp, PhoneAuth } from './login';
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <SignUp /> */}
       <Route exact path="/signIn" component={SignIn} />
       <Route path="/signUp" component={SignUp} />
+      <Route path="/phoneAuth" component={PhoneAuth} />
     </div>
   );
 }

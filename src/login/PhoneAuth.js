@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
+export default function PhoneAuth() {
   const classes = useStyles();
 
   const [signInEmail, setSignInEmail] = useState();
@@ -65,18 +65,6 @@ export default function SignIn() {
   };
   const handlePasswordChange = e => {
     setSignInPassword(e.target.value);
-  };
-
-  const handleAuthTestClick = async () => {
-    axios
-      .post('/login/auth')
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        // ... 에러 처리
-        console.log(`Auth Test error: ${error}`);
-      });
   };
 
   const handleSignInSubmit = async event => {
@@ -95,10 +83,10 @@ export default function SignIn() {
     axios
       .post('/login/signIn', data)
       .then(response => {
-        const { token } = response.data;
+        const { accessToken } = response.data;
         console.log(response.data);
         // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+        axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
         // accessToken을 localStorage, cookie 등에 저장하지 않는다!
       })
@@ -128,7 +116,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Phone Authenticate
         </Typography>
         <form onSubmit={handleSignInSubmit} className={classes.form} noValidate>
           <TextField
@@ -167,15 +155,6 @@ export default function SignIn() {
             className={classes.submit}
           >
             Sign In
-          </Button>
-
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={handleAuthTestClick}
-          >
-            Auth Test
           </Button>
           <Grid container>
             <Grid item xs>
