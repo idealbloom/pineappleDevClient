@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
 
 function Copyright() {
   return (
@@ -51,11 +53,24 @@ export default function SignUp() {
   const [signUpEmail, setSignUpEmail] = useState();
   const [signUpPassword, setSignUpPassword] = useState();
   const [signUpPasswordCheck] = useState();
+  const [radioValue, setRadioValue] = React.useState('female');
+  const [checkValue, setCheckValue] = React.useState(0);
+
+  useEffect(() => {
+    console.log(`signUpPassword: ${signUpPassword}`);
+  }, [signUpPassword]);
 
   useEffect(() => {
     console.log(`signUpEmail: ${signUpEmail}`);
-    console.log(`signUpPassword: ${signUpPassword}`);
-  }, [signUpEmail, signUpPassword]);
+  }, [signUpEmail]);
+
+  useEffect(() => {
+    console.log(radioValue);
+  }, [radioValue]);
+
+  useEffect(() => {
+    console.log(checkValue);
+  }, [checkValue]);
 
   const handleEmailChange = e => {
     setSignUpEmail(e.target.value);
@@ -70,6 +85,8 @@ export default function SignUp() {
       .post('http://localhost:3000/login/signUp', {
         email: signUpEmail,
         password: signUpPassword,
+        uType: radioValue,
+        marketingPolicy: checkValue,
       })
       .then(response => {
         console.log(response);
@@ -77,6 +94,13 @@ export default function SignUp() {
       .catch(response => {
         console.log(response);
       });
+  };
+
+  const handleRadioChange = event => {
+    setRadioValue(event.target.value);
+  };
+  const handleChackChange = () => {
+    setCheckValue(checkValue === 0 ? 1 : 0);
   };
 
   return (
@@ -154,10 +178,38 @@ export default function SignUp() {
                 autoComplete="current-password"
               />
             </Grid>
-
+            <RadioGroup
+              aria-label="userType"
+              name="userType"
+              value={radioValue}
+              onChange={handleRadioChange}
+            >
+              <FormControlLabel value="0" control={<Radio />} label="일반인" />
+              <FormControlLabel value="1" control={<Radio />} label="실연자" />
+              <FormControlLabel value="2" control={<Radio />} label="작곡가" />
+              <FormControlLabel value="3" control={<Radio />} label="작사가" />
+              <FormControlLabel value="4" control={<Radio />} label="연습생" />
+              <FormControlLabel
+                value="5"
+                control={<Radio />}
+                label="엔지니어"
+              />
+              <FormControlLabel
+                value="6"
+                control={<Radio />}
+                label="퍼포먼서"
+              />
+              <FormControlLabel
+                value="7"
+                control={<Radio />}
+                label="인플루언서"
+              />
+            </RadioGroup>
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
+                value={checkValue}
+                onChange={handleChackChange}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
