@@ -19,7 +19,7 @@ import axios from 'axios';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         Your Website
@@ -96,14 +96,14 @@ export default function PhoneAuth() {
       });
 
     // axios
-    //   .post("http://localhost:3000/login/signIn", {
+    //   .post('http://localhost:3000/login/signIn', {
     //     email: signInEmail,
     //     password: signInPassword,
     //   })
-    //   .then((response) => {
+    //   .then(response => {
     //     console.log(response);
     //   })
-    //   .catch((response) => {
+    //   .catch(response => {
     //     console.log(response);
     //   });
   };
