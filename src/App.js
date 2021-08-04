@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { SignIn, SignUp, PhoneAuth } from './login';
 
 function App() {
@@ -7,9 +7,12 @@ function App() {
     <div className="App">
       {/* <SignIn />
       <SignUp /> */}
-      <Route exact path="/signIn" component={SignIn} />
-      <Route path="/signUp" component={SignUp} />
-      <Route path="/phoneAuth" component={PhoneAuth} />
+      <Switch>
+        <Route path="/signIn" component={SignIn} />
+        <Route path="/signUp" component={SignUp} />
+        <Route path="/phoneAuth" component={PhoneAuth} />
+        <Redirect path="*" to="/signIn" />
+      </Switch>
     </div>
   );
 }
