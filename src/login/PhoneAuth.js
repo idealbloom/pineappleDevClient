@@ -103,7 +103,7 @@ export default function PhoneAuth() {
     };
     console.log(data);
 
-    axios.post('/auth/phone??', data).then(response => {
+    axios.post('/auth/submitAuthNo', data).then(response => {
       console.log(response);
     });
   };
