@@ -5,8 +5,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -47,27 +47,31 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  button: {
+    margin: theme.spacing(2, 0, 2),
+    height: '70%',
+  },
 }));
 
 export default function PhoneAuth() {
   const classes = useStyles();
 
-  const [signInEmail, setSignInEmail] = useState();
-  const [signInPassword, setSignInPassword] = useState();
+  const [phoneNo, setPhoneNo] = useState('+821020595137');
+  const [authNo, setAuthNo] = useState();
 
   useEffect(() => {
-    console.log(`signInEmail: ${signInEmail}`);
-    console.log(`signInPassword: ${signInPassword}`);
-  }, [signInEmail, signInPassword]);
+    console.log(`phoneNo: ${phoneNo}`);
+  }, [phoneNo]);
 
-  const handleEmailChange = e => {
-    setSignInEmail(e.target.value);
-  };
-  const handlePasswordChange = e => {
-    setSignInPassword(e.target.value);
+  const handlePhoneNoChange = e => {
+    setPhoneNo(e.target.value);
   };
 
-  const handleSignInSubmit = async event => {
+  const handleAuthNoChange = e => {
+    setAuthNo(e.target.value);
+  };
+
+  const handleGetAuthNoClick = async event => {
     event.preventDefault();
 
     // const saltRounds = 10;
@@ -75,37 +79,33 @@ export default function PhoneAuth() {
     // const hash = await bcryptjs.hash(signInPassword, salt);
 
     const data = {
-      email: signInEmail,
-      password: signInPassword,
+      phoneNo,
     };
     console.log(data);
+    axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
+      'token',
+    )}`;
 
     axios
-      .post('/login/signIn', data)
+      .post('/auth/phone', data)
       .then(response => {
-        const { accessToken } = response.data;
-        console.log(response.data);
-        // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-        axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-
-        // accessToken을 localStorage, cookie 등에 저장하지 않는다!
+        console.log(response);
       })
       .catch(error => {
         // ... 에러 처리
         console.log(`signIn error: ${error}`);
       });
+  };
 
-    // axios
-    //   .post("http://localhost:3000/login/signIn", {
-    //     email: signInEmail,
-    //     password: signInPassword,
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((response) => {
-    //     console.log(response);
-    //   });
+  const handleAuthNoSubmitClick = () => {
+    const data = {
+      authNo,
+    };
+    console.log(data);
+
+    axios.post('/auth/submitAuthNo', data).then(response => {
+      console.log(response);
+    });
   };
 
   return (
@@ -118,45 +118,63 @@ export default function PhoneAuth() {
         <Typography component="h1" variant="h5">
           Phone Authenticate
         </Typography>
-        <form onSubmit={handleSignInSubmit} className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            onChange={handleEmailChange}
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            onChange={handlePasswordChange}
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
+
+        <Grid container spacing={1}>
+          <Grid item xs={8}>
+            <TextField
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              required
+              id="phoneNo"
+              label="Phone Number"
+              name="phoneNo"
+              autoComplete="phoneNo"
+              placeholder="+821020595137"
+              onChange={handlePhoneNoChange}
+              autoFocus
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Button
+              variant="contained"
+              fullWidth
+              color="primary"
+              onClick={handleGetAuthNoClick}
+              className={classes.button}
+            >
+              인증번호 요청
+            </Button>
+          </Grid>
+          <Grid item xs={8}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              required
+              id="authNo"
+              label="Auth Number"
+              name="authNo"
+              autoComplete="authNo"
+              placeholder="118278"
+              onChange={handleAuthNoChange}
+              autoFocus
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Button
+              variant="contained"
+              fullWidth
+              color="primary"
+              onClick={handleAuthNoSubmitClick}
+              className={classes.button}
+            >
+              인증
+            </Button>
+          </Grid>
+        </Grid>
+
+        {/* <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
                 Forgot password?
@@ -167,8 +185,7 @@ export default function PhoneAuth() {
                 Don't have an account? Sign Up
               </Link>
             </Grid>
-          </Grid>
-        </form>
+          </Grid> */}
       </div>
       <Box mt={8}>
         <Copyright />
