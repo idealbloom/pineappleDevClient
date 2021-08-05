@@ -63,9 +63,8 @@ const useStyles = makeStyles({
   btn1: {
     backgroundColor: 'pink',
     justifyContent: 'space-between',
-    marginRight: 40,
+    marginRight: 50,
     color: '#fafafa',
-    margin: 0,
     textAlign: 'center',
   },
 });
