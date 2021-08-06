@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container';
 // import Avatar from '@material-ui/core/Avatar';
 import TextField from '@material-ui/core/TextField';
 import { Typography } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
   bg: {
@@ -98,34 +99,38 @@ export default function Findps2() {
           <Typography> 새로운 비밀번호를 입력해주세요. </Typography>
         </Box>
         <Box>
-          <TextField
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            required
-            id="Find"
-            label="Enter your new password"
-            name="Findps"
-            autoComplete="Findps"
-            placeholder="enter your new password"
-            onChange={handleFindpsChange}
-            autoFocus
-          />
-
-          <TextField
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            required
-            id="Find"
-            label="Confirm your new password"
-            name="Findps"
-            autoComplete="Findps"
-            secureTextEntry="true"
-            placeholder="confirm your password"
-            onChange={handleFindpsChange}
-            autoFocus
-          />
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              required
+              id="Find"
+              label="Enter your new password"
+              name="Findps"
+              autoComplete="Findps"
+              type="password"
+              placeholder="enter your new password"
+              onChange={handleFindpsChange}
+              autoFocus
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              required
+              id="Find"
+              label="Confirm your new password"
+              name="Findps"
+              autoComplete="Findps"
+              type="password"
+              placeholder="confirm your password"
+              onChange={handleFindpsChange}
+              autoFocus
+            />
+          </Grid>
           <Box>
             <span className={classes.TextStyle3}>
               * 비밀번호 초기화를 위한 본인인증을 진행합니다.
