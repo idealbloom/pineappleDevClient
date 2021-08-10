@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { isEmpty } from 'lodash';
+import { IBContext } from '../context/IBContext';
 
 // import bcryptjs from 'bcryptjs';
 
@@ -53,6 +54,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const context = useContext(IBContext);
+  console.log(context);
 
   const [signInEmail, setSignInEmail] = useState();
   const [signInPassword, setSignInPassword] = useState();
