@@ -53,10 +53,10 @@ const useStyles = makeStyles(theme => ({
 // state는 기본적으로 getter / setter의 개념이다.
 // set변수명으로 지정하는것은 변경가능한 변수명으로 사용하기위해.
 // key 는 지정 문자열로 어떤 아이템이 업데이트/삭제/변경되는지 정의하기위해 사용된다,
-// key는 반드시 변하지않고 예상가능하고 유일해야한다.
+// key는 반드시 변하지않고 예상가능하고 유알해야한다.
 // this는 해당클래스 자체를 의미하며. state를 두번 선언하는 것은 첫번째는 리턴값이고 set변수명은
 // 작성중 함수값을 갱신하기위해 사용하는 것이다
-// useEffect 사용예제/앞으로 일어날 일을 지정하는 것
+// useEffect 사용예제
 // function Example() {
 //   const [count, setCount] = useState(0);
 //   useEffect(() => {
@@ -183,18 +183,18 @@ export default function PhoneAuth() {
           </Grid>
         </Grid>
 
-        {/* <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                Don't have an account? Sign Up
-              </Link>
-            </Grid>
-          </Grid> */}
+        <Grid container>
+          <Grid item xs>
+            <Link href="#" variant="body2">
+              Forgot password?
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link href="#" variant="body2">
+              Don't have an account? Sign Up
+            </Link>
+          </Grid>
+        </Grid>
       </div>
       <Box mt={8}>
         <Copyright />
