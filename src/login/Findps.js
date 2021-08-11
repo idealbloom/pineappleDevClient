@@ -4,24 +4,17 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
-// import Container from '@material-ui/core/Container';
-// import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles({
-  bg: {
-    width: 600,
-    height: 80,
-  },
   box: {
     borderRadius: 8,
     backgroundColor: '#a5a8ae',
-    width: 240,
+    width: 300,
     height: 114,
     fontSize: 17,
     fontWeight: '600',
-    textAlign: 'end',
+    textAlign: 'center',
     color: '#fafafa',
     margin: 40,
     borderStyle: 'solid',
@@ -29,7 +22,7 @@ const useStyles = makeStyles({
     borderColor: 'pink',
   },
 
-  TextStyle: {
+  BoxText: {
     flexDirection: 'row',
     margin: 30,
     fontSize: 20,
@@ -41,11 +34,8 @@ const useStyles = makeStyles({
     fontSize: 17,
     fontWeight: '600',
     textAlign: 'center',
-    justifyContent: 'center',
     color: '#1a1b1c',
-    marginRight: 0,
-    marginLeft: 80,
-    margin: 60,
+    margin: 10,
   },
 
   TextStyle2: {
@@ -53,17 +43,7 @@ const useStyles = makeStyles({
     fontWeight: '600',
     textAlign: 'center',
     color: '#1a1b1c',
-    margin: 20,
-    marginTop: 30,
-  },
-
-  TextStyle3: {
-    fontSize: 21,
-    fontWeight: '600',
-    textAlign: 'center',
-    justifyContent: 'center',
-    color: '#fafafa',
-    margin: 60,
+    margin: 50,
   },
 
   btn: {
@@ -90,18 +70,6 @@ const useStyles = makeStyles({
     marginRight: 40,
   },
 
-  btn2: {
-    background: '#5545ba',
-    border: 0,
-    borderRadius: 8,
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: '#fafafa',
-    height: 48,
-    padding: '0 30px',
-    justifyContent: 'space-between',
-    marginRight: 40,
-  },
-
   avatar: {
     marginBottom: 0,
   },
@@ -115,22 +83,25 @@ export default function Findps() {
       <Box>
         <Box>
           <Typography component="h1" variant="h5" margin={20}>
-            <AnnouncementIcon /> ID / Password Authentication
+            <AnnouncementIcon className={classes.TextStyle1} /> ID / Password
+            Authentication
           </Typography>
         </Box>
-        <text className={classes.TextStyle1}>아이디는 아래와 같습니다.</text>
+        <Typography className={classes.TextStyle1}>
+          아이디는 아래와 같습니다.
+        </Typography>
 
         <Box className={classes.box}>
-          <text className={classes.TextStyle}> user@gmail.com </text>
+          <Typography className={classes.BoxText}> user@gmail.com </Typography>
         </Box>
         <Box>
-          <text className={classes.TextStyle2}>
+          <Typography className={classes.TextStyle2}>
             비밀번호를 분실하셨다면 다음을 눌러 초기화를 진행해주세요.
-          </text>
+          </Typography>
         </Box>
         <Box className={classes.btn}>
           <Button className={classes.btn1}>로그인</Button>
-          <Button className={classes.btn2}>다음</Button>
+          <Button className={classes.btn1}>다음</Button>
         </Box>
       </Box>
     </Container>
