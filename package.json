@@ -10,9 +10,11 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
+    "crunker": "^0.4.1",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-dropzone": "^11.3.4",
     "react-native": "^0.64.2",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-svg": "^12.1.1",
@@ -57,6 +59,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "prop-types": "^15.7.2"
   }
 }
