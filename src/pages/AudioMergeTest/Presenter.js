@@ -3,7 +3,8 @@ import React, { useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-
+import IconButton from '@material-ui/core/IconButton';
+import AudioTrack from '@material-ui/icons/Mic';
 import Grid from '@material-ui/core/Grid';
 
 const baseStyle = {
@@ -37,7 +38,13 @@ const rejectStyle = {
 
 const useStyles = makeStyles(theme => ({
   root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
     flexGrow: 1,
+  },
+  input: {
+    display: 'none',
   },
   paper: {
     padding: theme.spacing(2),
@@ -47,7 +54,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Presenter(props) {
-  const { onDrop } = props;
+  const { onDrop, recordHandler } = props;
   const classes = useStyles();
   const {
     getRootProps,
@@ -56,8 +63,6 @@ function Presenter(props) {
     isDragAccept,
     isDragReject,
   } = useDropzone({ onDrop, accept: 'audio/*, video/*' });
-
-  console.log(props);
 
   const style = useMemo(
     () => ({
@@ -68,7 +73,6 @@ function Presenter(props) {
     }),
     [isDragActive, isDragReject, isDragAccept],
   );
-
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
@@ -84,12 +88,14 @@ function Presenter(props) {
         <Grid item xs={3} />
         <Grid item xs={3} />
         <Grid item xs={6}>
-          <div className="container">
-            <div {...getRootProps({ style })}>
-              <input {...getInputProps()} />
-              <p>Drag n drop some files here, or click to select files</p>
-            </div>
-          </div>
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="span"
+            onClick={recordHandler}
+          >
+            <AudioTrack />
+          </IconButton>
         </Grid>
         <Grid item xs={3} />
       </Grid>
@@ -99,10 +105,12 @@ function Presenter(props) {
 
 Presenter.propTypes = {
   onDrop: PropTypes.func,
+  recordHandler: PropTypes.func,
 };
 
 Presenter.defaultProps = {
   onDrop: () => {},
+  recordHandler: () => {},
 };
 
 export default Presenter;
